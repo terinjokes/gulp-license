@@ -13,12 +13,12 @@ module.exports = function(type, options) {
 		var newFile = clone(file),
 				filename = path.join(__dirname, './licenses/', (options.tiny ? 'tiny' : type.toLowerCase()) + '.txt');
 
-		fs.readFile(filename, {encoding: 'utf8'}, function(err, data) {
+		fs.readFile(filename, function(err, data) {
 			if (err) {
 				return callback(err);
 			}
 
-			newFile.contents = new Buffer(Mustache.render(data, opts) + newFile.contents);
+			newFile.contents = new Buffer(Mustache.render(String(data), opts) + newFile.contents);
 
 			return callback(null, newFile);
 		});
