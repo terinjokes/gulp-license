@@ -23,7 +23,7 @@ describe('gulp-license plugin', function() {
 			gulp.file(filename)
 				.pipe(license(type, metadata))
 				.pipe(es.map(function(file) {
-					var expected = fs.readFileSync(path.join(__dirname, './fixtures/expected/', type.toLowerCase() + '.js'), {encoding: 'utf8'});
+					var expected = fs.readFileSync(path.join(__dirname, './fixtures/expected/', type.toLowerCase() + '.js'));
 					expect(String(file.contents)).to.equal(String(expected));
 					done();
 				}));
@@ -70,7 +70,7 @@ describe('gulp-license plugin', function() {
 			gulp.file(filename)
 				.pipe(license('MIT', defaults(clone(metadata), {tiny: true})))
 				.pipe(es.map(function(file) {
-					var expected = fs.readFileSync(path.join(__dirname, './fixtures/expected/tiny-mit.js'), {encoding: 'utf8'});
+					var expected = fs.readFileSync(path.join(__dirname, './fixtures/expected/tiny-mit.js'));
 					expect(String(file.contents)).to.equal(String(expected));
 					done();
 				}));
