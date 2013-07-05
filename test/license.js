@@ -57,12 +57,30 @@ describe('gulp-license plugin', function() {
 			makeLicenseText('GPL3', done);
 		});
 
+		it('should throw an error if my file doesn\'t exist', function(done) {
+			stream  = gulp.file(filename)
+				.pipe(license('Terin', metadata));
+
+			stream.on('error', function(error) {
+				done();
+			});
+		});
+
 		it('should add the MIT-type license to my file', function(done) {
 			gulp.file(filename)
 				.pipe(license('MIT', defaults(clone(metadata), {tiny: true})))
 				.pipe(es.map(function(file) {
 					var expected = fs.readFileSync(path.join(__dirname, './fixtures/expected/tiny-mit.js'), {encoding: 'utf8'});
 					expect(String(file.contents)).to.equal(String(expected));
+					done();
+				}));
+		});
+
+		it('should return file.contents as a buffer', function(done) {
+			gulp.file(filename)
+				.pipe(license('MIT', defaults(clone(metadata), {tiny: true})))
+				.pipe(es.map(function(file) {
+					expect(file.contents).to.be.an.instanceof(Buffer);
 					done();
 				}));
 		});

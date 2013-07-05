@@ -7,27 +7,20 @@ var es = require('event-stream'),
 
 module.exports = function(type, options) {
 	'use strict';
+
+	var opts = defaults(clone(options), {year: new Date().getFullYear(), license: type});
 	function license(file, callback) {
-		var newFile = {
-					path: file.path,
-					contents: file.contents
-				},
-				filename = options.tiny ? path.join(__dirname, './licenses/tiny.txt') : path.join(__dirname, './licenses/', type.toLowerCase() + '.txt');
+		var newFile = clone(file),
+				filename = path.join(__dirname, './licenses/', (options.tiny ? 'tiny' : type.toLowerCase()) + '.txt');
 
-		fs.exists(filename, function(exists) {
-			if (exists) {
-				fs.readFile(filename, {encoding: 'utf8'}, function(err, data) {
-					if (err) {
-						callback(err);
-					}
-
-					newFile.contents = Mustache.render(data, defaults(clone(options), {year: new Date().getFullYear(), license: type})) + newFile.contents;
-
-					callback(null, newFile);
-				});
-			} else {
-				callback(new Error('ENOENT, no such file or directory \'' + filename + '\''));
+		fs.readFile(filename, {encoding: 'utf8'}, function(err, data) {
+			if (err) {
+				return callback(err);
 			}
+
+			newFile.contents = new Buffer(Mustache.render(data, opts) + newFile.contents);
+
+			return callback(null, newFile);
 		});
 	}
 
