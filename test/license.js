@@ -23,7 +23,7 @@ describe('gulp-license plugin', function() {
 			gulp.file(filename)
 				.pipe(license(type, metadata))
 				.pipe(es.map(function(file) {
-					var expected = fs.readFileSync(path.join(__dirname, './fixtures/expected/', type + '.js'), {encoding: 'utf8'});
+					var expected = fs.readFileSync(path.join(__dirname, './fixtures/expected/', type.toLowerCase() + '.js'), {encoding: 'utf8'});
 					expect(String(file.contents)).to.equal(String(expected));
 					done();
 				}));
