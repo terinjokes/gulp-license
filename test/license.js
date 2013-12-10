@@ -4,8 +4,7 @@ var gulp = require('gulp'),
 		es = require('event-stream'),
 		path = require('path'),
 		fs = require('fs'),
-		defaults = require('defaults'),
-		clone = require('clone');
+		defaults = require('defaults');
 
 require('mocha');
 
@@ -20,7 +19,7 @@ describe('gulp-license plugin', function() {
 				filename = path.join(__dirname, './fixtures/test/data.js');
 
 		function makeLicenseText(type, done) {
-			gulp.file(filename)
+			gulp.src(filename)
 				.pipe(license(type, metadata))
 				.pipe(es.map(function(file) {
 					var expected = fs.readFileSync(path.join(__dirname, './fixtures/expected/', type.toLowerCase() + '.js'));
@@ -58,7 +57,7 @@ describe('gulp-license plugin', function() {
 		});
 
 		it('should throw an error if my file doesn\'t exist', function(done) {
-			stream  = gulp.file(filename)
+			stream  = gulp.src(filename)
 				.pipe(license('Terin', metadata));
 
 			stream.on('error', function(error) {
@@ -67,8 +66,8 @@ describe('gulp-license plugin', function() {
 		});
 
 		it('should add the MIT-type license to my file', function(done) {
-			gulp.file(filename)
-				.pipe(license('MIT', defaults(clone(metadata), {tiny: true})))
+			gulp.src(filename)
+				.pipe(license('MIT', defaults(metadata, {tiny: true})))
 				.pipe(es.map(function(file) {
 					var expected = fs.readFileSync(path.join(__dirname, './fixtures/expected/tiny-mit.js'));
 					expect(String(file.contents)).to.equal(String(expected));
@@ -77,8 +76,8 @@ describe('gulp-license plugin', function() {
 		});
 
 		it('should return file.contents as a buffer', function(done) {
-			gulp.file(filename)
-				.pipe(license('MIT', defaults(clone(metadata), {tiny: true})))
+			gulp.src(filename)
+				.pipe(license('MIT', defaults(metadata, {tiny: true})))
 				.pipe(es.map(function(file) {
 					expect(file.contents).to.be.an.instanceof(Buffer);
 					done();

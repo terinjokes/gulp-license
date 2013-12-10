@@ -11,8 +11,7 @@
   "dependencies": {
     "event-stream": "~3.0.15",
     "mustache": "~0.7.2",
-    "defaults": "~1.0.0",
-    "clone": "~0.1.9"
+    "defaults": "~1.0.0"
   },
   "main": "index.js",
   "engines": {
@@ -24,6 +23,6 @@
   "devDependencies": {
     "mocha": "~1.12.0",
     "chai": "~1.7.2",
-    "gulp": "~0.0.5"
+    "gulp": "~3.1.0"
   }
 }
