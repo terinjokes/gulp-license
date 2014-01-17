@@ -2,25 +2,43 @@ var es = require('event-stream'),
 		fs = require('fs'),
 		path = require('path'),
 		Mustache = require('mustache'),
-		defaults = require('defaults'),
-		clone = require('clone');
+		defaults = require('defaults');
+
+// simple cache so we dont keep reading the same files
+var cache = {};
+var getLicenseFile = function(file, callback) {
+	'use strict';
+
+	if (cache[file]) {
+		return callback(null, cache[file]);
+	}
+
+	var filename = path.join(__dirname, './licenses/', file);
+
+	fs.readFile(filename, function(err, data) {
+		if (err) {
+			return callback(err);
+		}
+		cache[file] = String(data);
+		callback(null, cache[file]);
+	});
+};
 
 module.exports = function(type, options) {
 	'use strict';
 
-	var opts = defaults(clone(options), {year: new Date().getFullYear(), license: type});
+	var opts = defaults(options, {year: new Date().getFullYear(), license: type});
 	function license(file, callback) {
-		var newFile = clone(file),
-				filename = path.join(__dirname, './licenses/', (options.tiny ? 'tiny' : type.toLowerCase()) + '.txt');
+		var filename = (options.tiny ? 'tiny' : type.toLowerCase()) + '.txt';
 
-		fs.readFile(filename, function(err, data) {
+		getLicenseFile(filename, function(err, data){
 			if (err) {
 				return callback(err);
 			}
 
-			newFile.contents = new Buffer(Mustache.render(String(data), opts) + newFile.contents);
+			file.contents = new Buffer(Mustache.render(data, opts) + file.contents);
 
-			return callback(null, newFile);
+			return callback(null, file);
 		});
 	}
 
