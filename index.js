@@ -1,46 +1,43 @@
-var es = require('event-stream'),
-		fs = require('fs'),
-		path = require('path'),
-		Mustache = require('mustache'),
-		defaults = require('defaults');
-
-// simple cache so we dont keep reading the same files
-var cache = {};
-var getLicenseFile = function(file, callback) {
-	'use strict';
-
-	if (cache[file]) {
-		return callback(null, cache[file]);
-	}
-
-	var filename = path.join(__dirname, './licenses/', file);
-
-	fs.readFile(filename, function(err, data) {
-		if (err) {
-			return callback(err);
-		}
-		cache[file] = String(data);
-		callback(null, cache[file]);
-	});
-};
+'use strict';
+var defaults = require('defaults'),
+		through = require('through2'),
+		getLicenseTemplate = require('./lib/licenseTemplateStore').get,
+		prefixStream = require('./lib/prefixStream');
 
 module.exports = function(type, options) {
-	'use strict';
 
-	var opts = defaults(options, {year: new Date().getFullYear(), license: type});
-	function license(file, callback) {
-		var filename = (options.tiny ? 'tiny' : type.toLowerCase()) + '.txt';
+	var opts = defaults(options, {
+		year: new Date().getFullYear(),
+		license: type
+	});
+	var licenseKey = options.tiny ? 'tiny' : type.toLowerCase();
 
-		getLicenseFile(filename, function(err, data){
+	function license(file, encoding, callback) {
+		/*jshint validthis:true */
+
+		if (file.isNull()) {
+			this.push(file);
+			return callback();
+		}
+
+		getLicenseTemplate(licenseKey, function(err, template) {
 			if (err) {
 				return callback(err);
 			}
 
-			file.contents = new Buffer(Mustache.render(data, opts) + file.contents);
+			if (file.isBuffer()) {
 
-			return callback(null, file);
-		});
+				file.contents = new Buffer(template(opts) + file.contents);
+			}
+
+			if (file.isStream()) {
+				file.contents = file.contents.pipe(prefixStream(template(opts)));
+			}
+
+			this.push(file);
+			return callback();
+		}.bind(this));
 	}
 
-	return es.map(license);
+	return through.obj(license);
 };

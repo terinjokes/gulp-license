@@ -9,20 +9,20 @@
   "homepage": "http://terinjokes.github.io/gulp-license/",
   "author": "Terin Stock <terinjokes@gmail.com>",
   "dependencies": {
-    "event-stream": "~3.0.15",
-    "mustache": "~0.7.2",
-    "defaults": "~1.0.0"
+    "defaults": "~1.0.0",
+    "through2": "~0.4.1",
+    "lodash.template": "~2.4.1"
   },
   "main": "index.js",
   "engines": {
-    "node": ">= 0.6"
+    "node": ">= 0.9"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "tape test/*.js"
   },
   "devDependencies": {
-    "mocha": "~1.12.0",
-    "chai": "~1.7.2",
-    "gulp": "~3.1.0"
+    "vinyl": "~0.2.3",
+    "tape": "~2.4.2",
+    "concat-stream": "~1.4.1"
   }
 }
