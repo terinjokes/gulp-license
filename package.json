@@ -1,28 +1,29 @@
 {
   "name": "gulp-license",
-  "version": "0.0.2",
   "description": "Add licenses to gulp streams.",
-  "keywords": [
-    "gulpplugin"
-  ],
-  "repository": "https://github.com/terinjokes/gulp-license.git",
-  "homepage": "http://terinjokes.github.io/gulp-license/",
+  "version": "0.0.2",
   "author": "Terin Stock <terinjokes@gmail.com>",
   "dependencies": {
     "defaults": "~1.0.0",
-    "through2": "~0.4.1",
-    "lodash.template": "~2.4.1"
+    "lodash.template": "~2.4.1",
+    "through2": "~0.4.1"
   },
-  "main": "index.js",
+  "devDependencies": {
+    "concat-stream": "~1.4.1",
+    "tape": "~2.4.2",
+    "vinyl": "~0.2.3"
+  },
   "engines": {
     "node": ">= 0.9"
   },
+  "homepage": "http://terinjokes.github.io/gulp-license/",
+  "keywords": [
+    "gulpplugin"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": "https://github.com/terinjokes/gulp-license.git",
   "scripts": {
     "test": "tape test/*.js"
-  },
-  "devDependencies": {
-    "vinyl": "~0.2.3",
-    "tape": "~2.4.2",
-    "concat-stream": "~1.4.1"
   }
 }
