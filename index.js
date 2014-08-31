@@ -13,11 +13,9 @@ module.exports = function(type, options) {
 	var licenseKey = options.tiny ? 'tiny' : type.toLowerCase();
 
 	function license(file, encoding, callback) {
-		/*jshint validthis:true */
 
 		if (file.isNull()) {
-			this.push(file);
-			return callback();
+			return callback(null, file);
 		}
 
 		getLicenseTemplate(licenseKey, function(err, template) {
@@ -34,9 +32,8 @@ module.exports = function(type, options) {
 				file.contents = file.contents.pipe(prefixStream(template(opts)));
 			}
 
-			this.push(file);
-			return callback();
-		}.bind(this));
+			return callback(null, file);
+		});
 	}
 
 	return through.obj(license);
