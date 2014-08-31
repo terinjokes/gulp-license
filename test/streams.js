@@ -41,6 +41,7 @@ test('should add license to streams', function(t) {
 	});
 
 	stream.write(testFile);
+	stream.end();
 });
 
 function stringStream() {

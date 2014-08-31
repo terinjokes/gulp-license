@@ -27,4 +27,5 @@ test('should ignore null files', function(t) {
 	});
 
 	stream.write(testFile);
+	stream.end();
 });

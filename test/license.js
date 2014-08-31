@@ -6,22 +6,15 @@ var test = require('tape'),
 var testContentsInput = 'module.exports = void 0';
 var testContentsExpected = '/*! (c) 2014 Terin Stock (MIT) */\nmodule.exports = void 0';
 
-var testFile1 = new Vinyl({
-	cwd: '/home/terin/broken-promises/',
-	base: '/home/terin/broken-promises/test',
-	path: '/home/terin/broken-promises/test/test1.js',
-	contents: new Buffer(testContentsInput)
-});
-
-var testFile2 = new Vinyl({
-	cwd: '/home/terin/broken-promises/',
-	base: '/home/terin/broken-promises/test',
-	path: '/home/terin/broken-promises/test/test2.js',
-	contents: new Buffer(testContentsInput)
-});
-
 test('should add tiny license to file', function(t) {
 	t.plan(7);
+
+	var testFile = new Vinyl({
+		cwd: '/home/terin/broken-promises/',
+		base: '/home/terin/broken-promises/test',
+		path: '/home/terin/broken-promises/test/test1.js',
+		contents: new Buffer(testContentsInput)
+	});
 
 	var stream = gulpLicense('MIT', {tiny: true, organization: 'Terin Stock'});
 
@@ -37,11 +30,19 @@ test('should add tiny license to file', function(t) {
 		t.equals(String(newFile.contents), testContentsExpected);
 	});
 
-	stream.write(testFile1);
+	stream.write(testFile);
+	stream.end();
 });
 
 test('should add license to file', function(t) {
 	t.plan(11);
+
+	var testFile = new Vinyl({
+		cwd: '/home/terin/broken-promises/',
+		base: '/home/terin/broken-promises/test',
+		path: '/home/terin/broken-promises/test/test1.js',
+		contents: new Buffer(testContentsInput)
+	});
 
 	var stream = gulpLicense('MIT', {organization: 'Terin Stock'});
 
@@ -62,5 +63,6 @@ test('should add license to file', function(t) {
 		t.true(/Terin Stock/.test(contents), 'does contain the author name');
 	});
 
-	stream.write(testFile2);
+	stream.write(testFile);
+	stream.end();
 });

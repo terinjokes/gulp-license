@@ -26,4 +26,5 @@ test('should report an error when license type could not be found', function(t) 
 	});
 
 	stream.write(testFile);
+	stream.end();
 });
