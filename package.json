@@ -1,7 +1,7 @@
 {
   "name": "gulp-license",
   "description": "Add licenses to gulp streams.",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "author": "Terin Stock <terinjokes@gmail.com>",
   "bugs": "https://github.com/terinjokes/gulp-license/issues",
   "dependencies": {
