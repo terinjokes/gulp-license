@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) {{ year }}, {{ organization }}
+ * Copyright (c) {{= it.year }}, {{= it.organization }}
  *
  * All rights reserved.
  *

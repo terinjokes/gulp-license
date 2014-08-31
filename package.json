@@ -5,14 +5,15 @@
   "author": "Terin Stock <terinjokes@gmail.com>",
   "dependencies": {
     "defaults": "~1.0.0",
-    "lodash.template": "~2.4.1",
     "through2": "^0.6.1"
   },
   "devDependencies": {
     "argg": "0.0.1",
     "codeclimate-test-reporter": "0.0.3",
     "concat-stream": "~1.4.1",
+    "dot": "^1.0.2",
     "istanbul": "^0.3.0",
+    "rat": "^1.1.1",
     "rimraf": "^2.2.8",
     "tape": "^2.14.0",
     "vinyl": "^0.4.2"
@@ -20,6 +21,12 @@
   "engines": {
     "node": ">= 0.9"
   },
+  "files": [
+    "README.md",
+    "index.js",
+    "lib",
+    "test"
+  ],
   "homepage": "http://terinjokes.github.io/gulp-license/",
   "keywords": [
     "gulpplugin"
@@ -28,9 +35,10 @@
   "main": "index.js",
   "repository": "https://github.com/terinjokes/gulp-license.git",
   "scripts": {
+    "prepublish": "./build.js",
     "codeclimate": "cat ./coverage/lcov.info|codeclimate",
-    "coverage": "istanbul cover node_modules/argg test/*.js --report lcovonly",
-    "coverage-html": "istanbul cover node_modules/argg test/*.js --report html",
+    "coverage": "istanbul cover -x lib/licenses.js node_modules/argg test/*.js --report lcovonly",
+    "coverage-html": "istanbul cover -x lib/licenses.js node_modules/argg test/*.js --report html",
     "rm": "rimraf ./coverage",
     "test": "npm run coverage && npm run rm",
     "test-report": "npm run coverage && npm run codeclimate && npm run rm"

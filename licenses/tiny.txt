@@ -1,1 +1,1 @@
-/*! (c) {{ year }} {{ organization }} ({{ license }}) */
+/*! (c) {{= it.year }} {{= it.organization }} ({{= it.license }}) */
