@@ -1,20 +1,12 @@
-[![Build Status](https://travis-ci.org/terinjokes/gulp-license.png?branch=master)](https://travis-ci.org/terinjokes/gulp-license)
+# gulp-license [![Build Status](http://img.shields.io/travis/terinjokes/gulp-license.svg?style=flat)](https://travis-ci.org/terinjokes/gulp-license) [![](http://img.shields.io/npm/dm/gulp-license.svg?style=flat)](https://www.npmjs.org/package/gulp-license) [![](http://img.shields.io/npm/v/gulp-license.svg?style=flat)](https://www.npmjs.org/package/gulp-license) [![](http://img.shields.io/codeclimate/github/terinjokes/gulp-license.svg?style=flat)](https://codeclimate.com/github/terinjokes/gulp-license) [![](http://img.shields.io/codeclimate/coverage/github/terinjokes/gulp-license.svg?style=flat)](https://codeclimate.com/github/terinjokes/gulp-license)
 
-## Information
+> Add licenses to gulp stream.
 
-<table>
-<tr>
-<td>Package</td><td>gulp-license</td>
-</tr>
-<tr>
-<td>Description</td>
-<td>Add licenses to gulp streams.</td>
-</tr>
-<tr>
-<td>Node Version</td>
-<td>≥ 0.9</td>
-</tr>
-</table>
+## Installation
+
+Install this package with npm and add it to your development dependencies:
+
+`npm install --save-dev gulp-license`
 
 ## Usage
 
@@ -22,33 +14,8 @@
 var license = require('gulp-license');
 
 gulp.task('license', function() {
-  gulp.files('./lib/*.js')
+  gulp.src('./lib/*.js')
     .pipe(license('MIT', {tiny: true}))
-    .pipe(gulp.folder('./dist/'))
+    .pipe(gulp.dest('./dist/'))
 });
 ```
-
-## LICENSE
-
-(MIT License)
-
-> Copyright (c) 2013 Terin Stock <terinjokes@gmail.com>
->
-> Permission is hereby granted, free of charge, to any person obtaining
-> a copy of this software and associated documentation files (the
-> "Software"), to deal in the Software without restriction, including
-> without limitation the rights to use, copy, modify, merge, publish,
-> distribute, sublicense, and/or sell copies of the Software, and to
-> permit persons to whom the Software is furnished to do so, subject to
-> the following conditions:
->
-> The above copyright notice and this permission notice shall be
-> included in all copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-> MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-> NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-> LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-> OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-> WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
