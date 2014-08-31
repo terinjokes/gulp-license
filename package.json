@@ -9,7 +9,11 @@
     "through2": "~0.4.1"
   },
   "devDependencies": {
+    "argg": "0.0.1",
+    "codeclimate-test-reporter": "0.0.3",
     "concat-stream": "~1.4.1",
+    "istanbul": "^0.3.0",
+    "rimraf": "^2.2.8",
     "tape": "~2.4.2",
     "vinyl": "~0.2.3"
   },
@@ -24,6 +28,11 @@
   "main": "index.js",
   "repository": "https://github.com/terinjokes/gulp-license.git",
   "scripts": {
-    "test": "tape test/*.js"
+    "codeclimate": "cat ./coverage/lcov.info|codeclimate",
+    "coverage": "istanbul cover node_modules/argg test/*.js --report lcovonly",
+    "coverage-html": "istanbul cover node_modules/argg test/*.js --report html",
+    "rm": "rimraf ./coverage",
+    "test": "npm run coverage && npm run rm",
+    "test-report": "npm run coverage && npm run codeclimate && npm run rm"
   }
 }
