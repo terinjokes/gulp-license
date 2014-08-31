@@ -5,19 +5,19 @@
   "author": "Terin Stock <terinjokes@gmail.com>",
   "bugs": "https://github.com/terinjokes/gulp-license/issues",
   "dependencies": {
-    "defaults": "~1.0.0",
-    "through2": "^0.6.1"
+    "defaults": ">=1.0.0 <2.0.0-0",
+    "through2": ">=0.6.1 <1.0.0-0"
   },
   "devDependencies": {
     "argg": "0.0.1",
     "codeclimate-test-reporter": "0.0.3",
-    "concat-stream": "~1.4.1",
-    "dot": "^1.0.2",
-    "istanbul": "^0.3.0",
-    "rat": "^1.1.1",
-    "rimraf": "^2.2.8",
-    "tape": "^2.14.0",
-    "vinyl": "^0.4.2"
+    "concat-stream": ">=1.4.1 <2.0.0-0",
+    "dot": ">=1.0.2 <2.0.0-0",
+    "istanbul": ">=0.3.0 <0.4.0-0",
+    "rat": ">=1.1.1 <2.0.0-0",
+    "rimraf": ">=2.2.8 <3.0.0-0",
+    "tape": ">=2.14.0 <3.0.0-0",
+    "vinyl": ">=0.4.2 <0.5.0-0"
   },
   "engines": {
     "node": ">= 0.9"
