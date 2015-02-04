@@ -6,8 +6,9 @@ var test = require('tape'),
 	Vinyl = require('vinyl'),
 	concat = require('concat-stream');
 
+var currentYear = new Date().getFullYear();
 var testContentsInput = 'module.exports = void 0';
-var testContentsExpected = '/*! (c) 2014 Terin Stock (MIT) */\nmodule.exports = void 0';
+var testContentsExpected = '/*! (c) ' + currentYear + ' Terin Stock (MIT) */\nmodule.exports = void 0';
 
 var testFile = new Vinyl({
 	cwd: '/home/terin/broken-promises/',
@@ -34,7 +35,7 @@ test('should add license to streams', function(t) {
 		t.ok(newFile.contents instanceof Stream, 'file contents are a Stream');
 
 		newFile.contents.pipe(concat({
-			encoding: 'string',
+			encoding: 'string'
 		}, function(contents) {
 			t.equals(contents, testContentsExpected);
 		}));

@@ -3,8 +3,9 @@ var test = require('tape'),
 	gulpLicense = require('../'),
 	Vinyl = require('vinyl');
 
+var currentYear = new Date().getFullYear();
 var testContentsInput = 'module.exports = void 0';
-var testContentsExpected = '/*! (c) 2014 Terin Stock (MIT) */\nmodule.exports = void 0';
+var testContentsExpected = '/*! (c) ' + currentYear + ' Terin Stock (MIT) */\nmodule.exports = void 0';
 
 test('should add tiny license to file', function(t) {
 	t.plan(7);
@@ -58,7 +59,7 @@ test('should add license to file', function(t) {
 
 		t.true(/The above copyright notice/.test(contents), 'contains MIT license');
 		t.false(/{{ year }}/.test(contents), 'does not contain template');
-		t.true(/2014/.test(contents), 'does contain the current year');
+		t.true(new RegExp(currentYear,"g").test(contents), 'does contain the current year');
 		t.false(/{{ organization }}/.test(contents), 'does not contain template');
 		t.true(/Terin Stock/.test(contents), 'does contain the author name');
 	});
