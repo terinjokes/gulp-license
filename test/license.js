@@ -1,13 +1,13 @@
 'use strict';
-var test = require('tape'),
-    gulpLicense = require('../'),
-    Vinyl = require('vinyl');
+var test = require('tape');
+var Vinyl = require('vinyl');
+var gulpLicense = require('../');
 
 var currentYear = (new Date()).getFullYear();
 var testContentsInput = 'module.exports = void 0';
 var testContentsExpected = '/*! (c) ' + currentYear + ' Terin Stock (MIT) */\nmodule.exports = void 0';
 
-test('should add tiny license to file', function(t) {
+test('should add tiny license to file', function (t) {
   t.plan(7);
 
   var testFile = new Vinyl({
@@ -19,7 +19,7 @@ test('should add tiny license to file', function(t) {
 
   var stream = gulpLicense('MIT', {tiny: true, organization: 'Terin Stock'});
 
-  stream.on('data', function(newFile) {
+  stream.on('data', function (newFile) {
     t.ok(newFile, 'emits a file');
     t.ok(newFile.path, 'file has a path');
     t.ok(newFile.relative, 'file has relative path information');
@@ -35,7 +35,7 @@ test('should add tiny license to file', function(t) {
   stream.end();
 });
 
-test('should add license to file', function(t) {
+test('should add license to file', function (t) {
   t.plan(11);
 
   var testFile = new Vinyl({
@@ -47,7 +47,7 @@ test('should add license to file', function(t) {
 
   var stream = gulpLicense('MIT', {organization: 'Terin Stock'});
 
-  stream.on('data', function(newFile) {
+  stream.on('data', function (newFile) {
     var contents = String(newFile.contents);
     t.ok(newFile, 'emits a file');
     t.ok(newFile.path, 'file has a path');

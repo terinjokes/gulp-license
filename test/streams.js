@@ -1,10 +1,10 @@
 'use strict';
-var test = require('tape'),
-    gulpLicense = require('../'),
-    Stream = require('stream'),
-    Readable = Stream.Readable,
-    Vinyl = require('vinyl'),
-    concat = require('concat-stream');
+var Stream = require('stream');
+var test = require('tape');
+var Readable = Stream.Readable;
+var Vinyl = require('vinyl');
+var concat = require('concat-stream');
+var gulpLicense = require('../');
 
 var currentYear = (new Date()).getFullYear();
 var testContentsInput = 'module.exports = void 0';
@@ -17,7 +17,7 @@ var testFile = new Vinyl({
   contents: stringStream()
 });
 
-test('should add license to streams', function(t) {
+test('should add license to streams', function (t) {
   t.plan(7);
 
   var stream = gulpLicense('MIT', {
@@ -25,7 +25,7 @@ test('should add license to streams', function(t) {
     organization: 'Terin Stock'
   });
 
-  stream.on('data', function(newFile) {
+  stream.on('data', function (newFile) {
     t.ok(newFile, 'emits a file');
     t.ok(newFile.path, 'file has a path');
     t.ok(newFile.relative, 'file has relative path information');
@@ -36,7 +36,7 @@ test('should add license to streams', function(t) {
 
     newFile.contents.pipe(concat({
       encoding: 'string'
-    }, function(contents) {
+    }, function (contents) {
       t.equals(contents, testContentsExpected);
     }));
   });
@@ -48,7 +48,7 @@ test('should add license to streams', function(t) {
 function stringStream() {
   var stream = new Readable();
 
-  stream._read = function() {
+  stream._read = function () {
     this.push(testContentsInput);
     this.push(null);
   };

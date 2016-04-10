@@ -1,26 +1,23 @@
 {
   "name": "gulp-license",
   "description": "Add licenses to gulp streams.",
-  "version": "1.0.0",
   "author": "Terin Stock <terinjokes@gmail.com>",
   "bugs": "https://github.com/terinjokes/gulp-license/issues",
   "dependencies": {
-    "defaults": ">=1.0.0 <2.0.0-0",
-    "through2": ">=0.6.1 <1.0.0-0"
+    "defaults": "^1.0.0",
+    "through2": "^2.0.1"
   },
   "devDependencies": {
-    "argg": "0.0.1",
-    "codeclimate-test-reporter": "0.0.3",
-    "concat-stream": ">=1.4.1 <2.0.0-0",
-    "dot": ">=1.0.2 <2.0.0-0",
-    "istanbul": ">=0.3.0 <0.4.0-0",
-    "rat": ">=1.1.1 <2.0.0-0",
-    "rimraf": ">=2.2.8 <3.0.0-0",
-    "tape": ">=2.14.0 <3.0.0-0",
-    "vinyl": ">=0.4.2 <0.5.0-0"
-  },
-  "engines": {
-    "node": ">= 0.9"
+    "codeclimate-test-reporter": "^0.3.1",
+    "concat-stream": "^1.4.1",
+    "dot": "^1.0.2",
+    "istanbul": "^0.4.3",
+    "rat": "^1.1.1",
+    "rimraf": "^2.2.8",
+    "semantic-release": "^4.3.5",
+    "tape": "^4.5.1",
+    "vinyl": "^1.1.1",
+    "xo": "^0.14.0"
   },
   "files": [
     "README.md",
@@ -28,20 +25,26 @@
     "lib",
     "test"
   ],
-  "homepage": "http://terinjokes.github.io/gulp-license/",
+  "homepage": "https://github.com/terinjokes/gulp-license",
   "keywords": [
     "gulpplugin"
   ],
   "license": "MIT",
   "main": "index.js",
-  "repository": "https://github.com/terinjokes/gulp-license.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terinjokes/gulp-license.git"
+  },
   "scripts": {
     "prepublish": "./build.js",
-    "codeclimate": "cat ./coverage/lcov.info|codeclimate",
-    "coverage": "istanbul cover -x lib/licenses.js node_modules/argg test/*.js --report lcovonly",
-    "coverage-html": "istanbul cover -x lib/licenses.js node_modules/argg test/*.js --report html",
-    "rm": "rimraf ./coverage",
-    "test": "npm run coverage && npm run rm",
-    "test-report": "npm run coverage && npm run codeclimate && npm run rm"
+    "test": "xo && istanbul cover -x lib/licenses.js --report lcovonly -- tape test/*.js",
+    "coverage": "cat ./coverage/lcov.info|codeclimate",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "xo": {
+    "space": true,
+    "ignores": [
+      "lib/licenses.js"
+    ]
   }
 }
