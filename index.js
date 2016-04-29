@@ -2,7 +2,7 @@
 var defaults = require('defaults');
 var through = require('through2');
 var licenses = require('./lib/licenses');
-var prefixStream = require('./lib/prefixStream');
+var prefixStream = require('./lib/prefix-stream');
 
 module.exports = function (type, options) {
   var opts = defaults(options, {
