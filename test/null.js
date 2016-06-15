@@ -13,7 +13,10 @@ var testFile = new Vinyl({
 test('should ignore null files', function (t) {
   t.plan(6);
 
-  var stream = gulpLicense('MIT', {tiny: true, organization: 'Terin Stock'});
+  var stream = gulpLicense('MIT', {
+    tiny: true,
+    organization: 'Terin Stock'
+  });
 
   stream.on('data', function (newFile) {
     t.ok(newFile, 'emits a file');

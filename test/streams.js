@@ -1,11 +1,11 @@
 'use strict';
 var Stream = require('stream');
 var test = require('tape');
-var Readable = Stream.Readable;
 var Vinyl = require('vinyl');
 var concat = require('concat-stream');
 var gulpLicense = require('../');
 
+var Readable = Stream.Readable;
 var currentYear = (new Date()).getFullYear();
 var testContentsInput = 'module.exports = void 0';
 var testContentsExpected = '/*! (c) ' + currentYear + ' Terin Stock (MIT) */\nmodule.exports = void 0';

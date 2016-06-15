@@ -17,7 +17,10 @@ test('should add tiny license to file', function (t) {
     contents: new Buffer(testContentsInput)
   });
 
-  var stream = gulpLicense('MIT', {tiny: true, organization: 'Terin Stock'});
+  var stream = gulpLicense('MIT', {
+    tiny: true,
+    organization: 'Terin Stock'
+  });
 
   stream.on('data', function (newFile) {
     t.ok(newFile, 'emits a file');
