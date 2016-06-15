@@ -17,7 +17,7 @@
     "semantic-release": "^4.3.5",
     "tape": "^4.5.1",
     "vinyl": "^1.1.1",
-    "xo": "^0.15.0"
+    "xo": "^0.16.0"
   },
   "files": [
     "README.md",
