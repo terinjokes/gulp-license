@@ -8,7 +8,7 @@
     "through2": "^2.0.1"
   },
   "devDependencies": {
-    "codeclimate-test-reporter": "^0.3.1",
+    "codeclimate-test-reporter": "^0.4.0",
     "concat-stream": "^1.4.1",
     "dot": "^1.0.2",
     "istanbul": "^0.4.3",
