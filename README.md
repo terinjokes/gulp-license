@@ -1,5 +1,7 @@
 # gulp-license [![][travis-shield-img]][travis-shield][![][npm-dl-shield-img]][npm-shield][![][npm-v-shield-img]][npm-shield][![][coveralls-shield-img]][coveralls-shield]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/terinjokes/gulp-license.svg)](https://greenkeeper.io/)
+
 > Add licenses to gulp stream.
 
 ## Installation
